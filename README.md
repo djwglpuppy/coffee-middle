@@ -21,7 +21,7 @@ app.configure "development", ->
     app.use(this.router)
 ```
 
-###Optional Parameters
+##Parameters
 
 - **src** (folder_dir) The folder directory where the `.coffee` files reside
 <br /><i>(required)</i>
@@ -32,7 +32,7 @@ app.configure "development", ->
 - **bare** (bool) A coffee compilation option to contain a function wrapper around the code within the file
 <br /><i>(defaults to **false**)</i>
 
-- **stylusFunction** (string) The name of the stylus global function (described below)
+- **jadeFunction** (string) The name of the Jade global function (described below)
 <br /><i>(defaults to **coffee**)</i>
 
 - **publicDir** (folder_dir) The name of the public directory that your script tags are referencing
@@ -43,3 +43,5 @@ app.configure "development", ->
 
 - **minify** (bool) Minify the written outputted JS file using `uglify-js`
 <br /><i>(defaults to **true**)</i>
+
+##Jade Global Helper Methos

@@ -9,7 +9,7 @@ module.exports = (config = {}) ->
         dest: ""
         bare: true
         helperScope: global
-        stylusFunction: "coffee"
+        jadeFunction: "coffee"
         publicDir: "/js/"
         writeFileToPublicDir: true
         minify: false
@@ -32,7 +32,7 @@ module.exports = (config = {}) ->
 
 
     #Global Jade Helper
-    config.helperScope[config.stylusFunction] = ->
+    config.helperScope[config.jadeFunction] = ->
         _.map(fileListing, (file) -> "<script src='#{file.public}'></script>").join("\r")
 
 
