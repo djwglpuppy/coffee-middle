@@ -1,0 +1,32 @@
+{
+  "name": "coffeekup",
+  "version": "0.0.1beta",
+  "author": "David K Roberts <davidroberts@gmail.com>",
+  "bugs": {
+    "url": "http://",
+    "email": "davidroberts@gmail.com"
+  },
+  "description": "A conect middleware application for compiling coffeescript.",
+  "homepage": "https://github.com/djwglpuppy/coffeekup",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/djwglpuppy/coffeekup.git"
+  },
+  "keywords": [
+    "coffee-script",
+    "coffee",
+    "middleware",
+    "compiler",
+    "express"
+    "connect"
+  ],
+  "main": "./index",
+  "dependencies": {
+    "coffee-script": ">=0.0.1",
+    "underscore": ">=0.0.1",
+    "uglify-js": ">=0.0.1"
+  },
+  "engines": {
+    "node": "*"
+  }
+}
