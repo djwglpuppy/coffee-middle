@@ -9,7 +9,7 @@ module.exports = (config = {}) ->
         dest: ""
         bare: true
         helperScope: global
-        stylusFunction: "coffeekup"
+        stylusFunction: "coffee"
         publicDir: "/js/"
         writeFileToPublicDir: true
         minify: false
@@ -55,12 +55,15 @@ module.exports = (config = {}) ->
                 content = coffee.compile(coffeecode, {bare: config.bare})
                 res.send(content)
 
-                if config.minify
-                    ast = jsp.parse(content)
-                    pro.ast_mangle(ast)
-                    ast = pro.ast_squeeze(ast)
-                    content = pro.gen_code(ast)
-                fs.writeFileSync(info.js, content) if config.writeFileToPublicDir
+                if config.writeFileToPublicDir
+
+                    if config.minify
+                        ast = jsp.parse(content)
+                        pro.ast_mangle(ast)
+                        ast = pro.ast_squeeze(ast)
+                        content = pro.gen_code(ast)
+                
+                    fs.writeFileSync(info.js, content) if config.writeFileToPublicDir
 
             else
                 next()

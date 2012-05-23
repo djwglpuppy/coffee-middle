@@ -1,23 +1,22 @@
 {
-  "name": "coffeekup",
+  "name": "coffee-middle",
   "version": "0.0.1beta",
   "author": "David K Roberts <davidroberts@gmail.com>",
   "bugs": {
-    "url": "http://",
-    "email": "davidroberts@gmail.com"
+    "url": "https://github.com/djwglpuppy/coffee-middle/issues"
   },
-  "description": "A conect middleware application for compiling coffeescript.",
+  "description": "A connect middleware coffee-middle for compiling coffeescript.",
   "homepage": "https://github.com/djwglpuppy/coffeekup",
   "repository": {
     "type": "git",
-    "url": "git://github.com/djwglpuppy/coffeekup.git"
+    "url": "git://github.com/djwglpuppy/coffee-middle.git"
   },
   "keywords": [
     "coffee-script",
     "coffee",
     "middleware",
     "compiler",
-    "express"
+    "express",
     "connect"
   ],
   "main": "./index",
