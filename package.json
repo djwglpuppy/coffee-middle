@@ -5,7 +5,7 @@
   "bugs": {
     "url": "https://github.com/djwglpuppy/coffee-middle/issues"
   },
-  "description": "A connect middleware coffee-middle for compiling coffeescript.",
+  "description": "A connect middleware for compiling coffeescript.",
   "homepage": "https://github.com/djwglpuppy/coffee-middle",
   "repository": {
     "type": "git",
