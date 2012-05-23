@@ -32,7 +32,7 @@ app.configure "development", ->
 - **bare** (bool) A coffee compilation option to contain a function wrapper around the code within the file
 <br /><i>(defaults to **false**)</i>
 
-- **jadeFunction** (string) The name of the Jade global function (described below)
+- **jadeFunction** (string) The name of the Jade global helper function (described below)
 <br /><i>(defaults to **coffee**)</i>
 
 - **publicDir** (folder_dir) The name of the public directory that your script tags are referencing
@@ -44,4 +44,39 @@ app.configure "development", ->
 - **minify** (bool) Minify the written outputted JS file using `uglify-js`
 <br /><i>(defaults to **true**)</i>
 
-##Jade Global Helper Methos
+##Jade Helper
+
+You have a choice of explicitely telling Jade the coffee files (as javascript files), OR you can use the Jade Helper Function.
+
+The Helper Function will look in the `src` folder you specified in the parameters and automatically tell Jade to output those files for you.  This is especially helpful if you do not care about the order the files are created in.
+
+###Manual
+
+(This is the normal jade way)
+
+```jade
+!!!
+html
+    head
+        title= title
+        script(src='/js/orders.js')
+        script(src='/js/products.js')
+      	script(src='/js/customers.js')
+```
+
+###Helper Function
+
+```jade
+!!!
+html
+	head
+		title= title
+		!= coffee()
+```
+
+
+...as you can see from the version number (0.0.1beta), I am just starting with this.  There are quite a bit of things I want to accomplish and will make them shortly in the wiki.
+
+
+
+
