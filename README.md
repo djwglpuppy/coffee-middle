@@ -43,7 +43,7 @@ app.configure("development", function(){
 - **dest** (folder_dir) The folder directory where the `.js` files will reside
 <br /><i>(required ONLY if you want to write the compiled coffee to a file)</i>
 
-- **bare** (bool) A coffee compilation option to contain a function wrapper around the code within the file
+- **bare** (bool) A coffee compilation option to contain a function wrapper around the code within the file.  False means it will have the wrapper function, true means it will not. 
 <br /><i>(defaults to **true**)</i>
 
 - **jadeFunction** (string) The name of the Jade global helper function (described below)
@@ -52,7 +52,7 @@ app.configure("development", function(){
 - **publicDir** (folder_dir) The name of the public directory that your script tags are referencing
 <br /><i>(defaults to **/js**)</i>
 
-- **writeFileToPublicDir** (bool) Write the compiled javascript file to the `dest` folder
+- **writeFileToPublicDir** (bool) Write the compiled javascript file to the `dest` folder.  If you make it false, all compilation will be done on the fly.  If you do have file writing turned on, it will compile the file **only** if the coffee file is newer than the js file.
 <br /><i>(defaults to **true**)</i>
 
 - **minify** (bool) Minify the written outputted JS file using `uglify-js`
