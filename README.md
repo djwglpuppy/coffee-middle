@@ -10,29 +10,15 @@ npm install coffee-middle
 
 ##Usage
 
-```
-app = express.createServer(
-    express.bodyParser(),
-    express.cookieParser()
-)
-
-app.configure ->
-    @set('views', __dirname + '/views')
-    @set('view engine', 'jade')
-
-
+```coffeescript
 app.configure "development", ->
-
-	#Here I am!
-    @use(require("coffee-middle")({
+	app.use(require("coffee-middle")({
         src: __dirname + "/precompiled/js/"
         dest: __dirname + "/static/js/"
     }))
 
-    @use(express.static(__dirname + '/static'))
-    @use(this.router)
-
-
+    app.use(express.static(__dirname + '/static'))
+    app.use(this.router)
 ```
 
 ###Optional Parameters
@@ -44,16 +30,16 @@ app.configure "development", ->
 <br /><i>(required ONLY if you want to write the compiled coffee to a file)</i>
 
 - **bare** (bool) A coffee compilation option to contain a function wrapper around the code within the file
-<br /><i>(defaults to false)</i>
+<br /><i>(defaults to **false**)</i>
 
 - **stylusFunction** (string) The name of the stylus global function (described below)
-<br /><i>(defaults to `coffee`)</i>
+<br /><i>(defaults to **coffee**)</i>
 
 - **publicDir** (folder_dir) The name of the public directory that your script tags are referencing
-<br /><i>(defaults to `/js/` (for now make sure to put a trailing slash))</i>
+<br /><i>(defaults to **/js** (for now make sure to put a trailing slash))</i>
 
 - **writeFileToPublicDir** (bool) Write the compiled javascript file to the `dest` folder
-<br /><i>(defaults to `true`)</i>
+<br /><i>(defaults to **true**)</i>
 
 - **minify** (bool) Minify the written outputted JS file using `uglify-js`
-<br /><i>(defaults to true)</i>
+<br /><i>(defaults to **true**)</i>
