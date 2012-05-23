@@ -1,6 +1,6 @@
 #Coffee-middle
 
-An easy to use Connect / Express middleware node.js application for compiling coffee-script files.  
+A Connect / Express middleware node.js application for compiling coffee-script files to a new file or on the fly.
 
 ##Installation
 
@@ -94,7 +94,7 @@ If **orders.coffee, products.coffee, and customers.coffee** are in the `src` fol
 
 
 ##The Future
-...as you can see from the version number (0.0.1beta), I am just starting with this.  There are quite a bit of things I want to accomplish and will maark them shortly in the wiki.
+...as you can see from the version number (0.0.1beta), I am just starting with this.  There are quite a bit of things I want to accomplish and will mark them shortly in the wiki.
 
 
 
