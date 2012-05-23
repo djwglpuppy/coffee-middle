@@ -1,6 +1,6 @@
 #Coffee-middle
 
-A simple to use connect / express middleware application for compiling coffee-script files.  
+An easy to use Connect / Express middleware node.js application for compiling coffee-script files.  
 
 ##Installation
 
@@ -48,10 +48,11 @@ app.configure "development", ->
 
 You have a choice of explicitely telling Jade the coffee files (as javascript files), OR you can use the Jade Helper Function.
 
-The Helper Function will look in the `src` folder you specified in the parameters and automatically tell Jade to output those files for you.  This is especially helpful if you do not care about the order the files are created in.
+The Helper Function will look in the `src` folder you specified in the parameters and automatically tell Jade to ask for all the files in that directory.  This is especially helpful if you do not care about the order the files are created in.
 
 ###Manual
-<br /><i>(This is the normal jade way)</i>
+
+<i>(This is the normal jade way)</i>
 
 ```jade
 !!!
@@ -64,7 +65,8 @@ html
 ```
 
 ###Helper Function
-<br /><i>(This is using the helper function created from coffee-middle)</i>
+
+<i>(This is using the helper function created from coffee-middle)</i>
 
 ```jade
 !!!
@@ -73,6 +75,9 @@ html
 		title= title
 		!= coffee()
 ```
+
+If **orders.coffee, products.coffee, and customers.coffee** are in the `src` folder you specified, both of these implementations would output to html in the exact same way.
+
 
 ##The Future
 ...as you can see from the version number (0.0.1beta), I am just starting with this.  There are quite a bit of things I want to accomplish and will make them shortly in the wiki.

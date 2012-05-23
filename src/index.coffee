@@ -10,13 +10,19 @@ module.exports = (config = {}) ->
         bare: true
         helperScope: global
         jadeFunction: "coffee"
-        publicDir: "/js/"
+        publicDir: "/js"
         writeFileToPublicDir: true
         minify: false
 
     if config.minify
         pro = uglify.uglify
         jsp = uglify.parser
+
+    throw "The src parameter for coffee-middle needs to be filled out" if config.src is ""
+
+    config.src += "/" if config.src.substr(-1) isnt "/"
+    config.dest += "/" if config.dest.substr(-1) isnt "/"
+    config.publicDir += "/" if config.publicDir.substr(-1) isnt "/"
 
     fileListing = {}
     coffeefiles = fs.readdirSync(config.src)
