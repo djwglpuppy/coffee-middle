@@ -21,6 +21,20 @@ app.configure "development", ->
     app.use(this.router)
 ```
 
+or Javascript (works in both)
+
+```javascript
+app.configure("development", function(){
+	app.use(require("coffee-middle")({
+        src: __dirname + "/precompiled/js",
+        dest: __dirname + "/static/js"
+    }));
+
+    app.use(express.static(__dirname + '/static'));
+    app.use(this.router);
+});
+```
+
 ##Parameters
 
 - **src** (folder_dir) The folder directory where the `.coffee` files reside
