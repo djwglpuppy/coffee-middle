@@ -13,8 +13,8 @@ npm install coffee-middle
 ```coffeescript
 app.configure "development", ->
 	app.use(require("coffee-middle")({
-        src: __dirname + "/precompiled/js/"
-        dest: __dirname + "/static/js/"
+        src: __dirname + "/precompiled/js"
+        dest: __dirname + "/static/js"
     }))
 
     app.use(express.static(__dirname + '/static'))
@@ -30,13 +30,13 @@ app.configure "development", ->
 <br /><i>(required ONLY if you want to write the compiled coffee to a file)</i>
 
 - **bare** (bool) A coffee compilation option to contain a function wrapper around the code within the file
-<br /><i>(defaults to **false**)</i>
+<br /><i>(defaults to **true**)</i>
 
 - **jadeFunction** (string) The name of the Jade global helper function (described below)
 <br /><i>(defaults to **coffee**)</i>
 
 - **publicDir** (folder_dir) The name of the public directory that your script tags are referencing
-<br /><i>(defaults to **/js** (for now make sure to put a trailing slash))</i>
+<br /><i>(defaults to **/js**)</i>
 
 - **writeFileToPublicDir** (bool) Write the compiled javascript file to the `dest` folder
 <br /><i>(defaults to **true**)</i>
@@ -51,8 +51,7 @@ You have a choice of explicitely telling Jade the coffee files (as javascript fi
 The Helper Function will look in the `src` folder you specified in the parameters and automatically tell Jade to output those files for you.  This is especially helpful if you do not care about the order the files are created in.
 
 ###Manual
-
-(This is the normal jade way)
+<br /><i>(This is the normal jade way)</i>
 
 ```jade
 !!!
@@ -65,6 +64,7 @@ html
 ```
 
 ###Helper Function
+<br /><i>(This is using the helper function created from coffee-middle)</i>
 
 ```jade
 !!!
@@ -74,7 +74,7 @@ html
 		!= coffee()
 ```
 
-
+##The Future
 ...as you can see from the version number (0.0.1beta), I am just starting with this.  There are quite a bit of things I want to accomplish and will make them shortly in the wiki.
 
 
