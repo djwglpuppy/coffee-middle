@@ -2,6 +2,7 @@ _ = require("underscore")
 fs = require("fs")
 coffee = require("coffee-script")
 uglify = require("uglify-js")
+changer = false
 
 module.exports = (config = {}) ->
     _.defaults config,
@@ -45,7 +46,11 @@ module.exports = (config = {}) ->
 
         _.each coffeefiles, (file) ->
             fs.watch config.src + file, (e) ->
-                io.sockets.emit("updatecoffee", {change: true}) if e is "change"
+                if changer
+                    changer = false
+                else
+                    console.log "Reloading Page to Update Coffee File"
+                    io.sockets.emit("updatecoffee", {change: true}) if e in ["change", "rename"]
 
 
 
@@ -63,6 +68,7 @@ module.exports = (config = {}) ->
                 var socket = io.connect('http://localhost:#{config.browserReloadPort}');
                 socket.on('updatecoffee', function (data) {
                     if (data.change === true){
+                        console.log("Reloading Page to Update Coffee File");
                         window.location.reload(true);
                     }
                 });
@@ -71,9 +77,8 @@ module.exports = (config = {}) ->
 
     return (req, res, next) ->
         return next() if req.method isnt "GET"
-
-
         iscoffeefile = req.path.match new RegExp(config.publicDir + "(.*)\.js$")
+
         if iscoffeefile?
             info = fileListing[iscoffeefile[1]]
             return next() if not info?
@@ -86,20 +91,33 @@ module.exports = (config = {}) ->
 
             if cf > jf
                 coffeecode = fs.readFileSync info.coffee, "ascii"
-                content = coffee.compile(coffeecode, {bare: config.bare})
-                res.contentType("application/javascript")
-                res.send(content)
+                changer = true
+                try
+                    content = coffee.compile(coffeecode, {bare: config.bare})
+                catch error
+                    console.log "CoffeeScript Compile Error:  Please Fix Before Continuing:\r\r"
+                    console.log error
+                    content = false
 
-                if config.writeFileToPublicDir
+                if content
+                    res.contentType("application/javascript")
+                    res.send(content)
 
-                    if config.minify
-                        ast = jsp.parse(content)
-                        pro.ast_mangle(ast)
-                        ast = pro.ast_squeeze(ast)
-                        content = pro.gen_code(ast)
-                
-                    fs.writeFileSync(info.js, content) if config.writeFileToPublicDir
+                    if config.writeFileToPublicDir
 
+                        if config.minify
+                            ast = jsp.parse(content)
+                            pro.ast_mangle(ast)
+                            ast = pro.ast_squeeze(ast)
+                            content = pro.gen_code(ast)
+                    
+                        fs.writeFileSync(info.js, content) if config.writeFileToPublicDir
+                else
+                    if not config.writeFileToPublicDir
+                        res.contentType("application/javascript")
+                        res.send()
+                    else
+                        next()
             else
                 next()
         else
