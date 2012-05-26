@@ -1,6 +1,6 @@
 {
   "name": "coffee-middle",
-  "version": "0.0.1beta",
+  "version": "0.0.2",
   "author": "David K Roberts <davidroberts@gmail.com>",
   "bugs": {
     "url": "https://github.com/djwglpuppy/coffee-middle/issues"
@@ -23,7 +23,8 @@
   "dependencies": {
     "coffee-script": ">=0.0.1",
     "underscore": ">=0.0.1",
-    "uglify-js": ">=0.0.1"
+    "uglify-js": ">=0.0.1",
+    "socket.io": ">=0.0.1"
   },
   "engines": {
     "node": "*"

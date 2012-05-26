@@ -13,6 +13,8 @@ module.exports = (config = {}) ->
         publicDir: "/js"
         writeFileToPublicDir: true
         minify: false
+        browserReload: false
+        browserReloadPort: 11911
 
     if config.minify
         pro = uglify.uglify
@@ -36,14 +38,40 @@ module.exports = (config = {}) ->
                 js: config.dest + valid[1] + ".js"
                 public: config.publicDir + valid[1] + ".js"
 
+    #socket.io reloader
+    if config.browserReload
+        io = require("socket.io").listen(config.browserReloadPort)
+        io.set('log level', 1)
+
+        _.each coffeefiles, (file) ->
+            fs.watch config.src + file, (e) ->
+                io.sockets.emit("updatecoffee", {change: true}) if e is "change"
+
+
+
+
 
     #Global Jade Helper
-    config.helperScope[config.jadeFunction] = ->
-        _.map(fileListing, (file) -> "<script src='#{file.public}'></script>").join("\r")
+    config.helperScope[config.jadeFunction] = (rendertype = "both") ->
+        display = ""
+        if rendertype in ["files", "both"]
+            display += _.map(fileListing, (file) -> "<script src='#{file.public}'></script>").join("\r")
+
+        if (rendertype in ["reload", "both"]) and config.browserReload
+            display += "<script src='http://localhost:#{config.browserReloadPort}/socket.io/socket.io.js'></script>"
+            display += """<script>
+                var socket = io.connect('http://localhost:#{config.browserReloadPort}');
+                socket.on('updatecoffee', function (data) {
+                    if (data.change === true){
+                        window.location.reload(true);
+                    }
+                });
+            </script>"""
 
 
     return (req, res, next) ->
         return next() if req.method isnt "GET"
+
 
         iscoffeefile = req.path.match new RegExp(config.publicDir + "(.*)\.js$")
         if iscoffeefile?
@@ -59,6 +87,7 @@ module.exports = (config = {}) ->
             if cf > jf
                 coffeecode = fs.readFileSync info.coffee, "ascii"
                 content = coffee.compile(coffeecode, {bare: config.bare})
+                res.contentType("application/javascript")
                 res.send(content)
 
                 if config.writeFileToPublicDir
