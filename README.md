@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/djwglpuppy/coffee-middle.png)](http://travis-ci.org/djwglpuppy/coffee-middle)
 #Coffee-middle
 
 A Connect / Express middleware node.js application for compiling coffee-script files to a new file or on the fly.
